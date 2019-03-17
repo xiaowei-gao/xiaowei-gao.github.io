@@ -98,25 +98,25 @@
 
 
 
-  <meta name="description" content="我们先了解一下宽带、带宽、吞吐量的概念宽带： 是指在同一传输介质上，使用特殊的技术或者设备，可以利用不同的频道进行多重（并行）传输，并且速率在256Kbps以上，至于到底多少速率以上算作宽带，目前没有国际标准，有人说大于56K就是宽带，有人说1Mbps以上才算宽带，因此与传统的互联网接入技术相比，宽带接入技术最大的优势就是其带宽速率远远超过56Kbps拨号，目前家用ADSL宽带大部分都已经达到10">
-<meta name="keywords" content="吞吐量,带宽">
+  <meta name="description" content="科普科普，什么是Anycast技术？在IP地址的世界里，大家熟知的IP地址类型大致有如下几种：  Unicast IP单播IP，IP地址和主机是一一对应关系。如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给某一个特定IP地址时，全局下仅有一个数据包接收主机。此为Unicast Multicast IP组播IP，组播IP拥有特定的IP地址段，当数据包发送给此组播IP地址后，组内成">
+<meta name="keywords" content="Anycast">
 <meta property="og:type" content="article">
-<meta property="og:title" content="看懂防火墙性能参数">
-<meta property="og:url" content="http://yoursite.com/2019/03/12/hello-world/index.html">
+<meta property="og:title" content="科普科普，什么是Anycast技术？">
+<meta property="og:url" content="http://yoursite.com/2019/03/17/Anycast技术/index.html">
 <meta property="og:site_name" content="Alex’s Blog 技术驱动人生">
-<meta property="og:description" content="我们先了解一下宽带、带宽、吞吐量的概念宽带： 是指在同一传输介质上，使用特殊的技术或者设备，可以利用不同的频道进行多重（并行）传输，并且速率在256Kbps以上，至于到底多少速率以上算作宽带，目前没有国际标准，有人说大于56K就是宽带，有人说1Mbps以上才算宽带，因此与传统的互联网接入技术相比，宽带接入技术最大的优势就是其带宽速率远远超过56Kbps拨号，目前家用ADSL宽带大部分都已经达到10">
+<meta property="og:description" content="科普科普，什么是Anycast技术？在IP地址的世界里，大家熟知的IP地址类型大致有如下几种：  Unicast IP单播IP，IP地址和主机是一一对应关系。如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给某一个特定IP地址时，全局下仅有一个数据包接收主机。此为Unicast Multicast IP组播IP，组播IP拥有特定的IP地址段，当数据包发送给此组播IP地址后，组内成">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-16T13:54:16.444Z">
+<meta property="og:updated_time" content="2019-03-17T01:05:30.374Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="看懂防火墙性能参数">
-<meta name="twitter:description" content="我们先了解一下宽带、带宽、吞吐量的概念宽带： 是指在同一传输介质上，使用特殊的技术或者设备，可以利用不同的频道进行多重（并行）传输，并且速率在256Kbps以上，至于到底多少速率以上算作宽带，目前没有国际标准，有人说大于56K就是宽带，有人说1Mbps以上才算宽带，因此与传统的互联网接入技术相比，宽带接入技术最大的优势就是其带宽速率远远超过56Kbps拨号，目前家用ADSL宽带大部分都已经达到10">
+<meta name="twitter:title" content="科普科普，什么是Anycast技术？">
+<meta name="twitter:description" content="科普科普，什么是Anycast技术？在IP地址的世界里，大家熟知的IP地址类型大致有如下几种：  Unicast IP单播IP，IP地址和主机是一一对应关系。如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给某一个特定IP地址时，全局下仅有一个数据包接收主机。此为Unicast Multicast IP组播IP，组播IP拥有特定的IP地址段，当数据包发送给此组播IP地址后，组内成">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/12/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/17/Anycast技术/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>看懂防火墙性能参数 | Alex’s Blog 技术驱动人生</title>
+  <title>科普科普，什么是Anycast技术？ | Alex’s Blog 技术驱动人生</title>
   
 
 
@@ -325,7 +325,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/12/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/17/Anycast技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Alex">
@@ -342,7 +342,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">看懂防火墙性能参数
+          <h1 class="post-title" itemprop="name headline">科普科普，什么是Anycast技术？
 
               
             
@@ -368,24 +368,12 @@
                 
               
 
-              <time title="Created: 2019-03-12 06:26:05" itemprop="dateCreated datePublished" datetime="2019-03-12T06:26:05+08:00">2019-03-12</time>
+              <time title="Created: 2019-03-17 09:03:10 / Modified: 09:05:30" itemprop="dateCreated datePublished" datetime="2019-03-17T09:03:10+08:00">2019-03-17</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2019-03-16 21:54:16" itemprop="dateModified" datetime="2019-03-16T21:54:16+08:00">2019-03-16</time>
               
             
           </span>
@@ -402,14 +390,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/防火墙/" itemprop="url" rel="index"><span itemprop="name">防火墙</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/防火墙/性能/" itemprop="url" rel="index"><span itemprop="name">性能</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Anycast/" itemprop="url" rel="index"><span itemprop="name">Anycast</span></a></span>
 
                 
                 
@@ -451,16 +432,16 @@
       
 
       
-        <h2 id="我们先了解一下宽带、带宽、吞吐量的概念"><a href="#我们先了解一下宽带、带宽、吞吐量的概念" class="headerlink" title="我们先了解一下宽带、带宽、吞吐量的概念"></a>我们先了解一下宽带、带宽、吞吐量的概念</h2><h3 id="宽带："><a href="#宽带：" class="headerlink" title="宽带："></a>宽带：</h3><blockquote>
-<p>是指在同一传输介质上，使用特殊的技术或者设备，可以利用不同的频道进行多重（并行）传输，并且速率在256Kbps以上，至于到底多少速率以上算作宽带，目前没有国际标准，有人说大于56K就是宽带，有人说1Mbps以上才算宽带，因此与传统的互联网接入技术相比，宽带接入技术最大的优势就是其带宽速率远远超过56Kbps拨号，目前家用ADSL宽带大部分都已经达到100M甚至200M了。</p>
-</blockquote>
-<h3 id="带宽-band-width-："><a href="#带宽-band-width-：" class="headerlink" title="带宽 (band width)："></a>带宽 (band width)：</h3><blockquote>
-<p>带宽就是单位时间内的最大数据流量，也可以说是单位时间内最大可能提供多少个二进制位传输。带宽通常以bps表示，即每秒可传输之位数。而1M带宽指的是1Mbps=1 megabits per second，飞塔防火墙的接口通常都是1000M，理论上每个接口的带宽也就是1000Mbps。</p>
-</blockquote>
-<h3 id="吞吐量-Throughput-："><a href="#吞吐量-Throughput-：" class="headerlink" title="吞吐量 (Throughput)："></a>吞吐量 (Throughput)：</h3><blockquote>
-<p>是指网络设备在每一秒内处理数据包的最大能力。当讨论通信链路的带宽时，一般是指链路上每秒所能传送的比特数，它取决于链路时钟速率和信道编码，在计算机网络中又称为线速，也就是可以说百兆以太网的带宽是100Mbps。但是需要区分链路上的可用带宽（带宽）与实际链路中每秒所能传送的比特数（吞吐量）。通常更倾向于用“吞吐量”一词来表示一个网络的性能表现。因为现实受各种低效率因素的影响（比如通信双发的网卡设备、链路状态等），所以由一段带宽为100Mbps的链路连接的一对节点可能只达到50Mbps的吞吐量。这样就意味着，一个主机上的应用只能够以50Mbps的速度向另外的一个主机发送数据。</p>
-</blockquote>
-
+        <h1 id="科普科普，什么是Anycast技术？"><a href="#科普科普，什么是Anycast技术？" class="headerlink" title="科普科普，什么是Anycast技术？"></a>科普科普，什么是Anycast技术？</h1><p>在IP地址的世界里，大家熟知的IP地址类型大致有如下几种：</p>
+<ul>
+<li>Unicast IP<br>单播IP，IP地址和主机是一一对应关系。<br>如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给某一个特定IP地址时，全局下仅有一个数据包接收主机。此为Unicast</li>
+<li>Multicast IP<br>组播IP，组播IP拥有特定的IP地址段，当数据包发送给此组播IP地址后，组内成员都能收到此数据包的一份拷贝。<br>如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给某一个特定组播IP地址时，同时存在多个数据包接收端。</li>
+<li>Broadcast IP<br>广播IP，任意Unicast单播网段中最后一个IP地址。数据包发送给此地址会扩散给全广播域的成员。<br>如下图，红色为数据包发送端，而绿色节点为数据包接收端。当数据包发送给广播IP地址时，所有成员均为数据包接收端。</li>
+</ul>
+<h3 id="Anycast-IP，集Multicast和Unicast特性于一身的特殊IP地址类型"><a href="#Anycast-IP，集Multicast和Unicast特性于一身的特殊IP地址类型" class="headerlink" title="Anycast IP，集Multicast和Unicast特性于一身的特殊IP地址类型"></a>Anycast IP，集Multicast和Unicast特性于一身的特殊IP地址类型</h3><p>  Anycast中文称为任意播。<br>   从宏观上来说，Anycast类似于Multicast，同一种类型的数据流同时存在多个接收者。而从微观上来说，Anycast又有着Unicast的唯一性。每一个单独的IP会话都能够找到唯一的源主机和目标主机。<br>   咋看之下很矛盾，其实不然.<br>   以DNS请求为例，假设全国人民同一时间发送1百万个DNS请求，他们都是发送给1.1.1.1的Anycast  DNS服务器地址。<br>  宏观上来说，所有数据包都送达给了分布在全国各地的DNS服务器。处于各地的DNS服务器分别接收到了一定数量的DNS请求，并作出回复。这体现了Multicast的特性。<br>  微观上，某一个特定的DNS请求数据包，一定是发送给了某一台DNS主机，而不是同时又多台DNS主机接收到了此数据包。此为Unicast特性。<br>  如下图，红色为数据包发送端，而绿色节点为数据包接收端。</p>
+<p>  在Anycast 环境下，总的来说，同时存在多个有效的数据包接收端，但是就某一个特定IP数据包而言，仅有一个接收端主机收到了此数据包。</p>
+<h3 id="Anycast-到底牛掰在哪里？"><a href="#Anycast-到底牛掰在哪里？" class="headerlink" title="Anycast 到底牛掰在哪里？"></a>Anycast 到底牛掰在哪里？</h3><p>在企业网络环境中，Anycast不太常见，其主要应用于大范围的DNS部署，CDN数据缓存，数据中心等。<br>自然而然，很多做企业网络维护的朋友会有疑问。怎么能让互联网的多个主机用同一个IP，这岂不是IP地址冲突了？<br>回答：<br>首先，每一个服务器主机处在不同的地理位置，他们之间不在同一个广播域内。所以把所有主机配置成相同的IP地址并不会引起我们日常所见的IP地址冲突。其次，光靠配置相同的IP地址时不够的，我们还需要借助强大的BGP帮忙。通过BGP，各个站点向Internet宣告相同的Anycast IP地址。自然而然，Internet就会接收到不同目标路径，但是具有相同IP地址段的prefix。那数据包是如何在这种环境下路由的呢？别急，往下看。<br>为了让大家有更深刻的理解和认识，下面将详细描述Anycast的主要优势和用途：</p>
+<h4 id="用途一：Load-balancing-负载均衡以及系统冗余性"><a href="#用途一：Load-balancing-负载均衡以及系统冗余性" class="headerlink" title="用途一：Load-balancing 负载均衡以及系统冗余性"></a>用途一：Load-balancing 负载均衡以及系统冗余性</h4>
       
     </div>
 
@@ -483,9 +464,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/吞吐量/" rel="tag"># 吞吐量</a>
-          
-            <a href="/tags/带宽/" rel="tag"># 带宽</a>
+            <a href="/tags/Anycast/" rel="tag"># Anycast</a>
           
         </div>
       
@@ -498,15 +477,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/03/12/hello-world/" rel="next" title="看懂防火墙性能参数">
+                <i class="fa fa-chevron-left"></i> 看懂防火墙性能参数
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/17/Anycast技术/" rel="prev" title="科普科普，什么是Anycast技术？">
-                科普科普，什么是Anycast技术？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -688,7 +667,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#我们先了解一下宽带、带宽、吞吐量的概念"><span class="nav-number">1.</span> <span class="nav-text">我们先了解一下宽带、带宽、吞吐量的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#宽带："><span class="nav-number">1.1.</span> <span class="nav-text">宽带：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带宽-band-width-："><span class="nav-number">1.2.</span> <span class="nav-text">带宽 (band width)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#吞吐量-Throughput-："><span class="nav-number">1.3.</span> <span class="nav-text">吞吐量 (Throughput)：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#科普科普，什么是Anycast技术？"><span class="nav-number">1.</span> <span class="nav-text">科普科普，什么是Anycast技术？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Anycast-IP，集Multicast和Unicast特性于一身的特殊IP地址类型"><span class="nav-number">1.0.1.</span> <span class="nav-text">Anycast IP，集Multicast和Unicast特性于一身的特殊IP地址类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anycast-到底牛掰在哪里？"><span class="nav-number">1.0.2.</span> <span class="nav-text">Anycast 到底牛掰在哪里？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用途一：Load-balancing-负载均衡以及系统冗余性"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">用途一：Load-balancing 负载均衡以及系统冗余性</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
