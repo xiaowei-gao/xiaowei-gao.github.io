@@ -321,6 +321,201 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/17/多活数据中心如何实现DNS域名解析和负载均衡/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alex">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alex’s Blog 技术驱动人生">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/17/多活数据中心如何实现DNS域名解析和负载均衡/" class="post-title-link" itemprop="url">分布式、多活数据中心如何实现DNS域名解析和负载均衡</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-03-17 10:20:15" itemprop="dateCreated datePublished" datetime="2019-03-17T10:20:15+08:00">2019-03-17</time>
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据中心/" itemprop="url" rel="index"><span itemprop="name">数据中心</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="分布式、多活数据中心如何实现DNS域名解析和负载均衡？"><a href="#分布式、多活数据中心如何实现DNS域名解析和负载均衡？" class="headerlink" title="分布式、多活数据中心如何实现DNS域名解析和负载均衡？"></a>分布式、多活数据中心如何实现DNS域名解析和负载均衡？</h1><p>今天的话题将带你从双活数据访问层面，谈谈域名解析和负载均衡。<br>DNS域名解析是B/S应用架构的一项重要服务，C/S架构应用一般是通过IP地址直接访问服务的。在云计算时代，业务主要通过B/S、分布式、多活的架构提供。然而对于网站运营和服务提供商来说，DNS域名解析的稳定可靠，意味着更好的业务体验，更好更大的访问流量。<br>随着云计算和分布式系统的发展，DNS在多数据中心、分布式应用架构中负载均衡和故障转移应用中越来越重要，今天我们对DNS概念、应用和原理进行梳理和解析。<br>DNS是互联网上作为域名和IP地址相互映射的一个分布式数据库。DNS能够使用户更方便的访问网络和应用，而不用去记忆杂乱、繁琐的IP数串。通过域名，最终得到该域名对应的IP地址的过程叫做域名解析。下面这张图，详细说明了一个DNS域名解析的全过程。<br><img src="http://s5.51cto.com/oss/201711/24/b369833ae0be9c1e35ba2111dd62a8e4.jpeg" alt="avatar"></p>
+<ul>
+<li>1、通常，在电脑打开浏览器，输入一个域名。比如输入<a href="http://www.163.com，这时电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般是网络接入服务器商提供，比如中国电信，中国移动。" target="_blank" rel="noopener">www.163.com，这时电脑会发出一个DNS请求到本地DNS服务器。本地DNS服务器一般是网络接入服务器商提供，比如中国电信，中国移动。</a></li>
+<li>2、查询<a href="http://www.163.com的DNS请求到达本地DNS服务器之后，本地DNS服务器会首先查询它的缓存记录，如果缓存中有此条记录，就可以直接返回结果。如果没有，本地DNS服务器还要向DNS根服务器进行查询。" target="_blank" rel="noopener">www.163.com的DNS请求到达本地DNS服务器之后，本地DNS服务器会首先查询它的缓存记录，如果缓存中有此条记录，就可以直接返回结果。如果没有，本地DNS服务器还要向DNS根服务器进行查询。</a></li>
+<li><p>3、根DNS服务器没有记录具体的域名和IP地址的对应关系，而是告诉本地DNS服务器，你可以到域服务器上去继续查询，并给出域服务器的地址。</p>
+</li>
+<li><p>4、本地DNS服务器继续向域服务器发出请求，在这个例子中，请求的对象是.com域服务器。.com域服务器收到请求之后，也不会直接返回域名和IP地址的对应关系，而是告诉本地DNS服务器，你的域名的解析服务器的地址。</p>
+</li>
+<li><p>5、最后，本地DNS服务器向域名的解析服务器发出请求，这时就能收到一个域名和IP地址对应关系，本地DNS服务器不仅要把IP地址返回给用户电脑，还要把这个对应关系保存在缓存中，以备下次别的用户查询时，可以直接返回结果，加快网络访问。</p>
+</li>
+</ul>
+<p>实际上，因特网上的DNS服务器也是按照层次安排的。每一个域名服务器只对域名体系中的一部分进行管辖。根据域名服务器所起的作用，可以把域名服务器划分为根域名服务器、顶级域名服务器、权限域名服务器和本地域名服务器四种不同的类型。<br>根域名服务器是最高层次的域名服务器，也是最重要的域名服务器。所有的根域名服务器都知道所有的顶级域名服务器的域名和IP地址。不管是哪一个本地域名服务器，若要对因特网上任何一个域名进行解析，只要自己无法解析，就首先求助根域名服务器。所以根域名服务器是最重要的域名服务器。假定所有的根域名服务器都瘫痪了，那么整个DNS系统就无法工作。<br>我们在配置DNS解析的时候，需要指定DNS解析的TTL(Time To Live)参数，这个参数告诉本地DNS服务器，域名缓存的最长时间。用阿里云解析来举例，阿里云解析默认的TTL是10分钟，10分钟的含义是本地DNS服务器对于域名的缓存时间是10分钟，10分钟之后，本地DNS服务器就会删除这条记录，删除之后，如果有用户访问这个域名，就要重复一遍上述复杂的流程。<br>如果网站已经进入稳定发展的状态，不会轻易更换IP地址，我们完全可以将TTL设置到协议最大值，即24小时。带来的好处是，让域名解析记录能够更长时间的存放在本地DNS服务器中，以加快所有用户的访问。<br>分布式、多活数据中心对外提供数据服务时，还会涉及到另外一个参数RTT(Round Trip Time)。分布在物理上A、B隔离两个区域的数据中心同时对外提供服务时，客户的服务请求是由A数据中心，还是由B数据中心响应，这就要看在DNS解析过程中，决定于解析过程中那个访问带来的RTT更小。下面一起通过一个实例来分析下技术原理。</p>
+<p><img src="http://s4.51cto.com/oss/201711/24/8a37b40da681d279cf85caf108082b1e.jpeg" alt="avatar"></p>
+<ul>
+<li>1、首先客户端向其所在运营商的Local DNS发起<a href="http://www.abc.com域名的DNS请求。" target="_blank" rel="noopener">www.abc.com域名的DNS请求。</a></li>
+<li><p>2、运营商的Local DNS服务器从RootDNS得知<a href="http://www.abc.com由DNS-CTC、DNS-CNC、DNS-USA1和DNS-USA2来解析，即RootDNS同时返回此" target="_blank" rel="noopener">www.abc.com由DNS-CTC、DNS-CNC、DNS-USA1和DNS-USA2来解析，即RootDNS同时返回此</a></p>
+</li>
+<li><p>4个DNS服务器地址给Local DNS(DNS的工作原理要求返回所有关于请求的记录，在此即返回4个DNS服务器，如果只返回一个DNS而此DNS刚好中断服务了，那么Local DNS只能是解析失败了)；</p>
+</li>
+<li>3、Local DNS轮询向这4个DNS服务器发出域名解析的请求，直到返回数据。</li>
+<li>4、在此，假如DNS-CTC响应Local DNS的域名解析请求，同时返回2台GTM的地址(本地监听的Web服务)。</li>
+<li>5、收到Local DNS请求的GTM首先查询在本地是否有该Local DNS的就近性表项，如果存在则直接给Local DNS返回速度最快的服务器地址。如果不存在，则通知另外一台GTM发起对该Local DNS的查询。</li>
+<li>6、两台DNS分别对Local DNS进行Probe。例如GTM-A查询该Local DNS的RTT时间为50ms，而GTM-B查询同一Local DNS的RTT时间为100ms，则此时在两台GTM内都形成了该Local DNS的对应就近性表记录。</li>
+<li>7、根据就近原则，Local DNS请求的GTM-A根据系统的就近性表返回相应的Data Center内的Web服务器地址(即1.1.1.1)。</li>
+<li>8、Local DNS获得地址后，将该地址返回给用户，到此DNS请求过程结束。</li>
+<li>9、用户向<a href="http://www.albc.com(1.1.1.1)网站发起访问。" target="_blank" rel="noopener">www.albc.com(1.1.1.1)网站发起访问。</a><br>分布式、多活数据中心中，一个域名对应两个业务IP地址，分别部署在两个数据中心。通过GSLB或DNS实现站点间的访问负载均衡。</li>
+</ul>
+<p><img src="http://s2.51cto.com/oss/201711/24/3d3b1953877cac4dae0ab8b607a8c13d.jpeg" alt="avatar"></p>
+<p>GSLB可以采用专用的F5 GTM设备，如果业务量小，也可以采用windows自带的DNS服务器，实现简单负载均衡(轮询)，GSLB跨站点负载均衡策略通常有两种。</p>
+<ul>
+<li><ol>
+<li>基于Local DNS请求所在的地理位置。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>基于GSLB与Local DNS的RTT最小。<br>GSLB在整个网络范围内将用户的请求定向到最近的节点(或者区域)，主要采用就近性判断，主要的方法包括DNS、应用层重定向、传输层重定向等。然而，SLB大多在一个服务节点范围内，根据设备节点的健康性、当前负载、服务能力、分布等情况将用户的请求分配到一个具体服务节点设备。</li>
+</ol>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/17/Anycast技术/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -705,7 +900,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -724,7 +919,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">categories</span>
                   
                 </div>
@@ -743,7 +940,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
